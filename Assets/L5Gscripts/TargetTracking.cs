@@ -117,7 +117,7 @@ public class TargetTracking : MonoBehaviour
     {
         if (LeadOn)
         {
-            agent.speed = 5f;
+            agent.speed = 3f;
         }
         //ShowFace = false;
     }
