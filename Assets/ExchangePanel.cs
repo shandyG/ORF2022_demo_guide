@@ -6,8 +6,7 @@ public class ExchangePanel : MonoBehaviour
 {
     public GameObject AvatarFukidashi;
     public GameObject DisplayPanel;
-    public GameObject ownDestination;
-    public GameObject speechKeyRecognition;
+    private GameObject speechKeyRecognition;
     public GameObject TalkingAvatar;
 
     private Animator animator;
@@ -22,10 +21,12 @@ public class ExchangePanel : MonoBehaviour
     // Start is called before the first frame update
 
     [SerializeField] private Transform _self;
-    [SerializeField] private Transform _target;
+    private GameObject target;
 
     void Start()
     {
+        target = GameObject.Find("Main Camera");
+        speechKeyRecognition = GameObject.Find("CognitiveSpeechManager");
         caScript = AvatarFukidashi.GetComponent<ChangeAgentText>();
         script = speechKeyRecognition.GetComponent<KeywordRecognition>();
         targetScript = TalkingAvatar.GetComponent<TargetTracking>();
@@ -44,7 +45,7 @@ public class ExchangePanel : MonoBehaviour
             caScript.ChangeText("こんにちは！案内しましょうか？");
             targetScript.TalkWithUser();
             Debug.Log("enter");
-            _self.LookAt(_target);
+            _self.LookAt(target.transform);
             script.ChangeDestinationObj(ownDestinationName, TalkingAvatar);
             animator.SetBool("Active", true);
             

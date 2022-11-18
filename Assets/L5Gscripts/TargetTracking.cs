@@ -13,8 +13,8 @@ public class TargetTracking : MonoBehaviour
     public Animator animator;
     public NavMeshAgent agent;
     public GameObject slave;
-    public GameObject target;
-    public GameObject master;
+    private GameObject target;
+    private GameObject master;
     public GameObject fukidashi;
     ReactiveProperty<bool> distanceFar = new ReactiveProperty<bool>(false); //unirxによる値の監視
     bool WalkFree = true;
@@ -29,6 +29,7 @@ public class TargetTracking : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        master = GameObject.Find("Main Camera");
         animator = GetComponent<Animator>();
         agent = transform.GetComponent<NavMeshAgent>();
         distanceFar.Subscribe(distanceFar => AgentMoveWithMaster());
